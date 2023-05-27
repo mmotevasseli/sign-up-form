@@ -3,6 +3,7 @@ import { validate } from "./validate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { notify } from "./toast";
+import styles from "./signUp.module.css";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -49,11 +50,15 @@ const SignUp = () => {
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment className={styles.container}>
       <div>
-        <form action="submit" onSubmit={submitHandler}>
-          <h2>Sign Up</h2>
-          <div>
+        <form
+          action="submit"
+          onSubmit={submitHandler}
+          className={styles.formContainer}
+        >
+          <h2 className={styles.header}>Sign Up</h2>
+          <div className={styles.formField}>
             <label htmlFor="#">Name</label>
             <input
               type="text"
@@ -61,10 +66,15 @@ const SignUp = () => {
               value={data.name}
               onChange={changeHandler}
               onFocus={focusHandler}
+              className={
+                errors.name && touched.name
+                  ? styles.uncompleted
+                  : styles.formInput
+              }
             />
             {errors.name && touched.name && <span>{errors.name}</span>}
           </div>
-          <div>
+          <div className={styles.formField}>
             <label htmlFor="#">Email </label>
             <input
               type="email"
@@ -72,10 +82,15 @@ const SignUp = () => {
               value={data.email}
               onChange={changeHandler}
               onFocus={focusHandler}
+              className={
+                errors.name && touched.name
+                  ? styles.uncompleted
+                  : styles.formInput
+              }
             />
             {errors.email && touched.email && <span>{errors.email}</span>}
           </div>
-          <div>
+          <div className={styles.formField}>
             <label htmlFor="#">Password</label>
             <input
               type="password"
@@ -83,12 +98,17 @@ const SignUp = () => {
               value={data.password}
               onChange={changeHandler}
               onFocus={focusHandler}
+              className={
+                errors.name && touched.name
+                  ? styles.uncompleted
+                  : styles.formInput
+              }
             />
             {errors.password && touched.password && (
               <span>{errors.password}</span>
             )}
           </div>
-          <div>
+          <div className={styles.formField}>
             <label htmlFor="#">Confirm Password</label>
             <input
               type="password"
@@ -96,26 +116,35 @@ const SignUp = () => {
               value={data.confirmPassword}
               onChange={changeHandler}
               onFocus={focusHandler}
+              className={
+                errors.name && touched.name
+                  ? styles.uncompleted
+                  : styles.formInput
+              }
             />
             {errors.confirmPassword && touched.confirmPassword && (
               <span>{errors.confirmPassword}</span>
             )}
           </div>
-          <div>
-            <label htmlFor="#">I accept terms of privacy and policy.</label>
-            <input
-              type="checkbox"
-              name="isAccepted"
-              value={data.isAccepted}
-              onChange={changeHandler}
-              onFocus={focusHandler}
-            />
+          <div className={styles.formField}>
+            <div className={styles.checkBoxContainer}>
+              <label htmlFor="#">I accept terms of privacy and policy.</label>
+              <input
+                type="checkbox"
+                name="isAccepted"
+                value={data.isAccepted}
+                onChange={changeHandler}
+                onFocus={focusHandler}
+              />
+            </div>
             {errors.isAccepted && touched.isAccepted && (
               <span>{errors.isAccepted}</span>
             )}
           </div>
-          <a href="#">Login</a>
-          <button>Sign Up</button>
+          <div className={styles.formButtons}>
+            <a href="#">Login</a>
+            <button>Sign Up</button>
+          </div>
         </form>
       </div>
       <ToastContainer />
